@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Base extends CI_Controller {
 
-	
 	public function Index()
 	{
 		// Recupera os contatos através do model
@@ -17,10 +16,6 @@ class Base extends CI_Controller {
 
 	public function Salvar(){
 
-		// Recupera os contatos através do model
-		$contatos = $this->contatos_model->GetAll('nome');
-		// Passa os contatos para o array que será enviado à home
-		$dados['contatos'] =$this->contatos_model->Formatar($contatos);
 		// Executa o processo de validação do formulário
 		$validacao = self::Validar();
 
@@ -36,16 +31,12 @@ class Base extends CI_Controller {
 			if(!$status){
 				$this->session->set_flashdata('error', 'Não foi possível inserir o contato.');
 			}else{
-				$this->session->set_flashdata('success', 'Contato inserido com sucesso.');
-				// Redireciona o usuário para a home
-				redirect();
+				$this->session->set_flashdata('success', 'Contato inserido com sucesso.');				
 			}
 		}else{
 			$this->session->set_flashdata('error', validation_errors('<p>','</p>'));
 		}
-		// Carrega a home
-		$this->load->view('home',$dados);
-
+		return self::Index();
 	}
 
 	

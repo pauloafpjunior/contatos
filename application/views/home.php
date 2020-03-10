@@ -14,7 +14,7 @@
 		<div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
 	<?php endif; ?>
 
-	<form method="post" action="<?=base_url('salvar')?>" enctype="multipart/form-data">
+	<form method="post" action="<?php echo base_url(); ?>salvar" enctype="multipart/form-data">
 
 		<div class="col-md-4">
 			<div class="form-group">
@@ -60,7 +60,7 @@
 			</thead>
 			<tbody>
 				<?php if ($contatos == FALSE): ?>
-					<tr><td colspan="2">Nenhum contato encontrado</td></tr>
+					<tr><td colspan="5">Nenhum contato encontrado</td></tr>
 				<?php else: ?>
 					<?php foreach ($contatos as $row): ?>
 						<tr>
@@ -68,13 +68,16 @@
 							<td><?= $row['telefone'] ?></td>
 							<td><?= $row['email'] ?></td>
 							<td><?= $row['endereco'] ?></td>
-							<td class="text-center"><a href="<?= $row['editar_url'] ?>">[Editar]</a> <a href="<?= $row['excluir_url'] ?>">[Excluir]</a></td>
+							<td class="text-center"><a href="<?php echo base_url(); ?>editar/<?= $row['id'] ?>">[Editar]</a> <a href="<?php echo base_url(); ?>excluir/<?= $row['id'] ?>">[Excluir]</a></td>
 						</tr>
 					<?php endforeach; ?>
 				<?php endif; ?>
 			</tbody>
 		</table>
+
 	</div>
+
+	
 
 </div>
 
